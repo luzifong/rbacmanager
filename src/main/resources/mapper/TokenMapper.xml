@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rbacmanager.permission.mapper.TokenMapper">
+
+
+    <select id="selectByPrimaryKey" resultType="com.rbacmanager.permission.pojo.UserToken">
+        SELECT id, uid, token, update_date updateDate FROM token WHERE uid = #{uid}
+    </select>
+
+    <insert id="addUserToken">
+        INSERT INTO
+        token (uid, token, update_date)
+        VALUES
+        (#{uid}, #{token}, #{updateDate})
+    </insert>
+
+    <update id="updateUserToken">
+        UPDATE token SET
+        token = #{token}, update_date = #{updateDate}
+        WHERE uid = #{uid}
+    </update>
+</mapper>
