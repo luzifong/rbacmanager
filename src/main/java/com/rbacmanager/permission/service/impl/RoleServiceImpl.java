@@ -1,6 +1,8 @@
 package com.rbacmanager.permission.service.impl;
 
 import com.rbacmanager.permission.mapper.RoleMapper;
+import com.rbacmanager.permission.mapper.RolePermissionMapper;
+import com.rbacmanager.permission.mapper.UserRoleMapper;
 import com.rbacmanager.permission.pojo.Role;
 import com.rbacmanager.permission.pojo.UserRole;
 import com.rbacmanager.permission.service.RoleService;
@@ -15,15 +17,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleMapper roleMapper;
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
     public List<Role> listRoles() {
         return roleMapper.listRoles();
-    }
-
-    @Override
-    public void addUserRole(UserRole userRole) {
-        roleMapper.addUserRole(userRole);
     }
 
     @Override
@@ -33,27 +32,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void deleteByPrimaryKey(Integer id) {
-        deleteUserRoleByRolePrimaryKey(id);
+        userRoleMapper.deleteUserRoleByRolePrimaryKey(id);
         roleMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public List<Map<String, Object>> selectRolePermission(Integer id) {
-        return roleMapper.selectRolePermission(id);
     }
 
     @Override
     public Role selectByPrimaryKey(Integer id) {
         return roleMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public void deleteRolePermissionByRolePrimaryKey(Integer id) {
-        roleMapper.deleteRolePermissionByRolePrimaryKey(id);
-    }
-
-    @Override
-    public void deleteUserRoleByRolePrimaryKey(Integer id) {
-        roleMapper.deleteUserRoleByRolePrimaryKey(id);
     }
 }

@@ -12,19 +12,8 @@
         SELECT permission_name FROM permission WHERE permission_id = #{id}
     </select>
 
-    <insert id="addRolePermission" keyProperty="id"  useGeneratedKeys="true" parameterType="com.rbacmanager.permission.pojo.RolePermission">
-        INSERT INTO role_permission
-        (role_id, role_name, permission_id, permission_name)
-        VALUES
-        (#{role_id}, #{role_name}, #{permission_id}, #{permission_name})
-    </insert>
-
     <delete id="deleteByPrimaryKey">
         DELETE FROM permission WHERE permission_id = #{id}
-    </delete>
-
-    <delete id="deleteRolePermissionByPermissionPrimaryKey">
-        DELETE FROM role_permission WHERE permission_id = #{id}
     </delete>
 
 </mapper>

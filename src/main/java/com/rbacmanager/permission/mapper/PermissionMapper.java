@@ -16,6 +16,4 @@ public interface PermissionMapper {
     void addRolePermission(RolePermission rolePermission);
 
     void deleteByPrimaryKey(Integer id);
-
-    void deleteRolePermissionByPermissionPrimaryKey(Integer id);
 }

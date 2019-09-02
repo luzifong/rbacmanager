@@ -1,5 +1,6 @@
 package com.rbacmanager.permission.controller;
 
+import com.rbacmanager.permission.mapper.RolePermissionMapper;
 import com.rbacmanager.permission.pojo.Permission;
 import com.rbacmanager.permission.pojo.RolePermission;
 import com.rbacmanager.permission.service.PermissionService;
@@ -18,6 +19,8 @@ public class PermissionController {
     RoleService roleService;
     @Autowired
     PermissionService permissionService;
+    @Autowired
+    RolePermissionMapper rolePermissionMapper;
 
     @GetMapping("")
     public String editRolePermission(@RequestParam(value = "role_id")String role_id, @RequestParam(value = "permission_id")String... ids) {
@@ -28,7 +31,7 @@ public class PermissionController {
                 Integer intId = Integer.parseInt(id.substring(1, id.length()));
                 if (intId != 0) {
                     if (flag){
-                        roleService.deleteRolePermissionByRolePrimaryKey(intRoleId);
+                        rolePermissionMapper.deleteRolePermissionByRolePrimaryKey(intRoleId);
                         flag = false;
                     }
                     RolePermission rolePermission = new RolePermission();
@@ -36,9 +39,9 @@ public class PermissionController {
                     rolePermission.setRole_name(roleService.selectRoleNameByRoleId(intRoleId));
                     rolePermission.setPermission_id(intId);
                     rolePermission.setPermission_name(permissionService.selectPermissionNameByPermissionId(intId));
-                    permissionService.addRolePermission(rolePermission);
+                    rolePermissionMapper.addRolePermission(rolePermission);
                 }
-                else roleService.deleteRolePermissionByRolePrimaryKey(intRoleId);
+                else rolePermissionMapper.deleteRolePermissionByRolePrimaryKey(intRoleId);
             }
         }
         return "redirect:/roles/" + role_id;

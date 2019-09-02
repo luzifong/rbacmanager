@@ -17,10 +17,6 @@ public interface UserMapper {
 
     void deleteByPrimaryKey(Integer id);
 
-    void deleteUserRoleByUserPrimaryKey(Integer id);
-
-    List<Map<String, Object>> selectUserRole(Integer id);
-
     String selectUsernameByUserId(Integer id);
 
     void updateTokenInfoByUserId(Integer user_id, String token, Date date);

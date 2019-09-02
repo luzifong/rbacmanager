@@ -1,6 +1,7 @@
 package com.rbacmanager.permission.service.impl;
 
 import com.rbacmanager.permission.mapper.UserMapper;
+import com.rbacmanager.permission.mapper.UserRoleMapper;
 import com.rbacmanager.permission.pojo.User;
 import com.rbacmanager.permission.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
     public List<User> listUser() {
@@ -22,18 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteByPrimaryKey(Integer id) {
-        deleteUserRoleByUserPrimaryKey(id);
+        userRoleMapper.deleteUserRoleByUserPrimaryKey(id);
         userMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public void deleteUserRoleByUserPrimaryKey(Integer id) {
-        userMapper.deleteUserRoleByUserPrimaryKey(id);
-    }
-
-    @Override
-    public List<Map<String, Object>> selectUserRole(Integer id) {
-        return userMapper.selectUserRole(id);
     }
 
     @Override

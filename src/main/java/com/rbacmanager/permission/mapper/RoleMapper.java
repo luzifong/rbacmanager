@@ -15,13 +15,5 @@ public interface RoleMapper {
 
     void deleteByPrimaryKey(Integer id);
 
-    void deleteUserRoleByRolePrimaryKey(Integer id);
-
-    void deleteRolePermissionByRolePrimaryKey(Integer id);
-
-    List<Map<String, Object>> selectRolePermission(Integer id);
-
     String selectRoleNameByRoleId(Integer id);
-
-    void addUserRole(UserRole userRole);
 }

@@ -1,6 +1,7 @@
 package com.rbacmanager.permission.controller;
 
 import com.rbacmanager.permission.mapper.RealUserMapper;
+import com.rbacmanager.permission.mapper.UserRoleMapper;
 import com.rbacmanager.permission.pojo.RealUser;
 import com.rbacmanager.permission.pojo.Role;
 import com.rbacmanager.permission.pojo.User;
@@ -24,6 +25,8 @@ public class UserController {
     RoleService roleService;
     @Autowired
     RealUserMapper realUserMapper;
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @GetMapping("")
     public String listUser(Model model) {
@@ -35,7 +38,7 @@ public class UserController {
     @GetMapping("/{user_id}")
     public String editUserRolePage(@PathVariable(value = "user_id") Integer id, Model model) {
         User user = userService.selectByPrimaryKey(id);
-        List<Map<String, Object>> userRoles = userService.selectUserRole(id);
+        List<Map<String, Object>> userRoles = userRoleMapper.selectUserRoleByUserPrimaryKey(id);
         List<Role> roles = roleService.listRoles();
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
